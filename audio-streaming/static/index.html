@@ -1,0 +1,161 @@
+<!-- static/index.html -->
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Real-Time Voice AI</title>
+  <style>
+    body { 
+      font-family: system-ui; 
+      padding: 20px; 
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .controls {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    button { 
+      padding: 12px 20px; 
+      font-size: 16px; 
+      cursor: pointer;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    #startBtn {
+      background: #4CAF50;
+      color: white;
+    }
+    
+    #endBtn {
+      background: #f44336;
+      color: white;
+    }
+    
+    /* Toggle Switch */
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      background: #f0f0f0;
+      border-radius: 8px;
+    }
+    
+    .toggle-label {
+      font-weight: 500;
+      font-size: 14px;
+    }
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    
+    .provider-name {
+      min-width: 100px;
+      font-weight: bold;
+      color: #666;
+    }
+    
+    .provider-name.active {
+      color: #2196F3;
+    }
+    
+    #status {
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    
+    #log {
+      white-space: pre-wrap;
+      border: 1px solid #ccc;
+      padding: 15px;
+      height: 400px;
+      overflow-y: auto;
+      margin-top: 20px;
+      background: #f9f9f9;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <h2>🎙️ Real-Time Voice AI Assistant</h2>
+  
+  <div class="controls">
+    <button id="startBtn">Start Call</button>
+    <button id="endBtn" disabled>End Call</button>
+    <span id="status">Idle</span>
+  </div>
+
+  <!-- ✅ Model Provider Toggle -->
+  <div class="toggle-container">
+    <span class="toggle-label">Voice Provider:</span>
+    <span class="provider-name" id="piperLabel">Whisper/Piper</span>
+    <label class="switch">
+      <input type="checkbox" id="providerToggle">
+      <span class="slider"></span>
+    </label>
+    <span class="provider-name" id="elevenLabsLabel">ElevenLabs</span>
+  </div>
+
+  <div id="log"></div>
+
+  <audio id="remoteAudio" autoplay playsinline></audio>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
